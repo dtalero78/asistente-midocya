@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Calling App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-<body class="fondo-medico">
-    <!-- Overlay opcional para oscurecer un poco el fondo -->
+<body>
 
+    <!-- Capa oscura para mejorar contraste -->
+    <div class="overlay"></div>
+
+    <!-- Contenedor central del botón -->
+    <div class="main-container">
+        <button id="callButton">Iniciar Llamada</button>
+    </div>
+
+    <!-- Caja que aparece durante la llamada -->
     <div id="ringBox">
         <div class="ring-content">
             <div class="wave"></div>
@@ -21,7 +29,6 @@
         </div>
     </div>
 
-    <button id="callButton">Iniciar Llamada</button>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
