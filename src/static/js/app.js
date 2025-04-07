@@ -201,12 +201,14 @@ async function initOpenAIRealtime() {
                 // Inyectar instrucciones personalizadas si llega el evento de creación de sesión
                 if (msg.type === "session.created" && chatbotData) {
                     const systemInstructions = `
-Eres un asistente de salud ocupacional de BSL. Pregúntale al paciente sobre su historial médico.
+Eres un servicio médico de triage de BSL. Saluda al paciente por su nombre y pregúntale síntomas tiene.
 El paciente se llama ${chatbotData.primerNombre?.trim() || "el paciente"}.
 Historial de salud: ${chatbotData.encuestaSalud?.join(", ") || "no especificado"}.
 Antecedentes familiares: ${chatbotData.antecedentesFamiliares?.join(", ") || "no especificados"}.
-Sé amable pero específico. No te extiendas demasiado. La entrevista no debe durar más de 1 minuto.
-
+Sé amable pero específico. No te extiendas demasiado. La entrevista no debe durar más de 2 minuto.
+Solo debes responder a preguntas relacionadas con salud. No hables de otros temas.
+Menciona el historial de salud que tienes del paciente.
+Si tiene sintomas graves, dile que inmediatemente busque atención médica y que pasaremos el reporte a un médico de BSL
 Al finalizar la entrevista, genera un resumen completo de la conversación y llámalo como función sendEmail({ message: "resumen" }) para enviarlo por correo.
                    `;
                     const sessionUpdate = {
