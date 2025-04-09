@@ -1,228 +1,221 @@
-/* Reset y estilo base */
+/* ------------------ Reset y estilo base ------------------ */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Fondo general */
-  body {
-    background: url("/static/assets/fondo-medico-virtual.jpg") no-repeat center center fixed;
-    background-size: contain;
-    background-color: #444; /* opcional si la imagen no cubre todo */
-  }
-  
-  /* Contenedor central para centrar el botón */
-  .main-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* Fondo oscuro superpuesto */
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.4);
-    z-index: 0;
-    pointer-events: none;
-  }
-  
-  /* Botón principal */
-  #callButton {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 25px;
-    background: #fff;
-    color: #6e8efb;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  #callButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  }
-  
-  /* Pantalla completa durante la llamada */
-  #ringBox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("/static/assets/fondo-medico-virtual.jpg") no-repeat center center;
-    background-size: contain;
-    background-color: #444; /* opcional para rellenar si no ocupa todo */
-    display: none;
-    z-index: 9999;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-  
-  /* Centrado del contenido en la llamada */
-  .ring-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  /* Timer */
-  .timer {
-    font-size: 4rem;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    margin: 20px 0;
-    display: none;
-  }
-  
-  /* Estado de llamada */
-  .call-status {
-    font-size: 16px;
-    color: white;
-    margin: 20px 0;
-    white-space: pre-line;
-    text-align: center;
-  }
-  
-  /* Botón para finalizar llamada */
-  #endCallBtn {
-    display: none;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    background: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    z-index: 10000;
-    pointer-events: auto;
-    margin: 20px auto;
-  }
-  #endCallBtn:hover {
-    background: #ff2222;
-    transform: translateY(-2px);
-  }
-  
-  /* Animaciones */
-  .wave {
-    position: absolute;
-    border: 2px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: waveAnim 2s infinite;
-  }
-  @keyframes waveAnim {
-    0% { width: 0px; height: 0px; opacity: 0.8; }
-    100% { width: 400px; height: 400px; opacity: 0; }
-  }
-  
-  .loader {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    animation: slideIn 0.5s ease-out;
-  }
-  .notification.success {
-    background: #4CAF50;
-    color: white;
-  }
-  .notification.error {
-    background: #f44336;
-    color: white;
-  }
-  @keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-  }
-  
-  /* Responsivo */
-  @media (max-width: 480px) {
-    #callButton {
-      font-size: 1rem;
-      padding: 12px 24px;
-    }
-  }
-  
-  .timer-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    text-align: left;
-    z-index: 10000;
-  }
-  
-  .timer {
-    font-size: 2.5rem;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    display: none;
-    margin-bottom: 10px;
-  }
-  
-  .speak-now {
-    font-size: 1.2rem;
-    color:rgb(6, 142, 24);
-    font-weight: bold;
-    display: none;
+body {
+  background: url("/static/assets/fondo-medico-virtual.jpg") no-repeat center center fixed;
+  background-size: contain;
+  background-color: #444;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* ------------------ Layout principal ------------------ */
+.main-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ------------------ Botón principal ------------------ */
+#callButton {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 25px;
+  background: #fff;
+  color: #6e8efb;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#callButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ------------------ Pantalla de llamada ------------------ */
+#ringBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/static/assets/fondo-medico-virtual.jpg") no-repeat center center;
+  background-size: contain;
+  background-color: #444;
+  display: none;
+  z-index: 9999;
+}
+
+.ring-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ------------------ Timer y mensaje ------------------ */
+.timer-wrapper {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10000;
+}
+
+.timer-wrapper .timer {
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 6px;
+  display: none;
+}
+
+.timer-wrapper .speak-now {
+  font-size: 1.1rem;
+  color: #008CBA;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+.speak-now.visible {
+  opacity: 1;
+}
+
+.mic-icon {
+  animation: pulse 1.2s ease-in-out infinite;
+  font-size: 1.3rem;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+}
+
+/* ------------------ Estado de llamada ------------------ */
+.call-status {
+  font-size: 16px;
+  color: white;
+  margin: 20px 0;
+  white-space: pre-line;
+  text-align: center;
+}
+
+/* ------------------ Botón para finalizar llamada ------------------ */
+#endCallBtn {
+  display: none;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 10000;
+  pointer-events: auto;
+  margin: 20px auto;
+}
+
+#endCallBtn:hover {
+  background: #ff2222;
+  transform: translateY(-2px);
+}
+
+/* ------------------ Ondas ------------------ */
+.wave {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: waveAnim 2s infinite;
+}
+
+@keyframes waveAnim {
+  0% { width: 0px; height: 0px; opacity: 0.8; }
+  100% { width: 400px; height: 400px; opacity: 0; }
+}
+
+/* ------------------ Loader y notificaciones ------------------ */
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  animation: slideIn 0.5s ease-out;
+}
+
+.notification.success {
+  background: #4CAF50;
+  color: white;
+}
+
+.notification.error {
+  background: #f44336;
+  color: white;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* ------------------ Responsivo ------------------ */
+@media (max-width: 480px) {
+  #callButton {
+    font-size: 1rem;
+    padding: 12px 24px;
   }
 
   .timer-wrapper {
-    position: absolute;
-    top: 110px;  /* Ajusta según tu logo */
-    left: 50px;  /* Cerca del logo */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* para alinear texto a la izquierda */
-    z-index: 10000;
+    top: 80px;
   }
-  
-  .timer-wrapper .timer {
-    font-size: 2.5rem;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    margin-bottom: 8px;
-    display: none;
-  }
-  
-  .timer-wrapper .speak-now {
-    font-size: 1rem;
-    color: #00FFAA;
-    font-weight: bold;
-    display: none;
-    animation: blink 1s infinite;
-  }
-  
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-  
-
-  
+}
