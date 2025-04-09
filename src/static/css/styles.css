@@ -170,3 +170,26 @@
     }
   }
   
+  .timer-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
+    z-index: 10000;
+  }
+  
+  .timer {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    display: none;
+    margin-bottom: 10px;
+  }
+  
+  .speak-now {
+    font-size: 1.2rem;
+    color: #00FFAA;
+    font-weight: bold;
+    display: none;
+  }
+  

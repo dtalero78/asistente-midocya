@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Calling App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
 
     <!-- Capa oscura para mejorar contraste -->
@@ -23,7 +25,10 @@
             <div class="wave" style="animation-delay: 0.6s"></div>
             <div class="wave" style="animation-delay: 1.2s"></div>
             <div class="call-status">Iniciando...</div>
-            <div class="timer">00:00:00</div>
+            <div class="timer-container">
+                <div class="timer">00:00:00</div>
+                <div class="speak-now">PUEDES HABLAR</div>
+            </div>
             <div class="loader" style="display: none;">Enviando resumen...</div>
             <button id="endCallBtn" style="display: none;">Finalizar Llamada</button>
         </div>
@@ -31,4 +36,5 @@
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
+
 </html>
