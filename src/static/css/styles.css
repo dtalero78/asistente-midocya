@@ -188,18 +188,18 @@
   
   .speak-now {
     font-size: 1.2rem;
-    color: #00FFAA;
+    color:rgb(6, 142, 24);
     font-weight: bold;
     display: none;
   }
 
   .timer-wrapper {
     position: absolute;
-    top: 100px; /* ajusta según la posición del logo */
-    right: 50px; /* cerca del borde derecho */
+    top: 110px;  /* Ajusta según tu logo */
+    left: 50px;  /* Cerca del logo */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* para alinear texto a la izquierda */
     z-index: 10000;
   }
   
@@ -208,14 +208,21 @@
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     margin-bottom: 8px;
-    display: block; /* visible si lo manejas por JS */
+    display: none;
   }
   
   .timer-wrapper .speak-now {
     font-size: 1rem;
     color: #00FFAA;
     font-weight: bold;
-    display: block;
+    display: none;
+    animation: blink 1s infinite;
   }
   
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  
+
   

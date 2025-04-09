@@ -51,6 +51,9 @@ const callButton = document.getElementById('callButton');
 const endCallBtn = document.getElementById('endCallBtn');
 const callStatus = document.querySelector('.call-status');
 const timer = document.querySelector('.timer');
+const speakNow = document.querySelector('.speak-now');
+speakNow.style.display = 'none';
+
 
 
 // Initialize timer display
@@ -129,9 +132,11 @@ async function initOpenAIRealtime() {
                 isConnected = true;
                 callStatus.textContent = 'Connected';
                 timer.style.display = 'block';
+                speakNow.style.display = 'block'; // ✅ Mostrar solo cuando se establece conexión
                 startTimer();
-                endCallBtn.style.display = 'none'; // ⛔ Ocultar mientras no haya resumen
+                endCallBtn.style.display = 'none';
             }
+            
         };
 
 
