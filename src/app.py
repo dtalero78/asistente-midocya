@@ -5,10 +5,47 @@ import smtplib
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
+from sqlalchemy import create_engine, Column, Integer, String, Text
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 load_dotenv()
 
+
+Base = declarative_base()
+engine = create_engine('sqlite:///historias.db')
+SessionLocal = sessionmaker(bind=engine)
+
+
+class HistoriaClinica(Base):
+    __tablename__ = "historia_clinica"
+
+    id = Column(Integer, primary_key=True, index=True)
+    nombre = Column(String(255))
+    edad = Column(String(50))
+    sexo = Column(String(50))
+    nacimiento = Column(String(50))
+    documento = Column(String(50))
+    estado_civil = Column(String(50))
+    ocupacion = Column(String(255))
+    direccion = Column(String(255))
+    ciudad = Column(String(255))
+    eps = Column(String(255))
+    enfermedades = Column(Text)
+    hospitalizaciones = Column(Text)
+    medicamentos = Column(Text)
+    alergias = Column(Text)
+
+    def to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+
+# Crea la tabla si no existe
+Base.metadata.create_all(bind=engine)
+print("🗃️ Base de datos lista: historias.db")
+
+
+
 app = Flask(__name__, template_folder="templates", static_folder="static")
+CORS(app)
 print("✅ Flask iniciado correctamente")
 
 @app.route('/')
@@ -25,7 +62,7 @@ def get_session():
             "model": "gpt-4o-realtime-preview-2024-12-17",
             "modalities": ["audio", "text"],
             "voice": "ash",
-            "instructions": "Eres un asitente médico de BSL"
+            "instructions": ""
         }
         
         headers = {
@@ -76,6 +113,65 @@ def send_email():
         return jsonify({
             'error': f"Email error: {str(e)}"
         }), 500
+
+
+
+
+@app.route('/guardar-historia', methods=['POST'])
+def guardar_historia():
+    db = SessionLocal()
+    try:
+        data = request.json
+        nueva_historia = HistoriaClinica(**data)
+        db.add(nueva_historia)
+        db.commit()
+        db.refresh(nueva_historia)
+        return jsonify({"success": True, "id": nueva_historia.id})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        db.close()
+
+
+@app.route('/historias', methods=['GET'])
+def get_historias():
+    try:
+        db = SessionLocal()
+        historias = db.query(HistoriaClinica).all()
+        db.close()
+        return jsonify([h.to_dict() for h in historias])
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        db.close()
+
+
+
+@app.route('/ver-historias')
+def ver_historias():
+    return render_template('historias.html')
+
+@app.route('/historia/<int:historia_id>', methods=['GET'])
+def obtener_historia(historia_id):
+    db = SessionLocal()
+    try:
+        historia = db.query(HistoriaClinica).filter_by(id=historia_id).first()
+        if historia:
+            return jsonify({
+                "success": True,
+                "historia": historia.to_dict()
+            })
+        else:
+            return jsonify({
+                "success": False,
+                "error": "Historia no encontrada"
+            }), 404
+    except Exception as e:
+        return jsonify({ "success": False, "error": str(e) }), 500
+    finally:
+        db.close()
+
+
 
 
 if __name__ == '__main__':

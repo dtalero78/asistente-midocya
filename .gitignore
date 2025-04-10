@@ -32,3 +32,5 @@ Thumbs.db
 # Archivos generados por el usuario
 *.sqlite3
 files-to-keep.txt
+
+historias.db

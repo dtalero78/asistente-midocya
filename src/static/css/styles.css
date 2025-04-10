@@ -79,8 +79,8 @@ body {
 /* ------------------ Timer y mensaje ------------------ */
 .timer-wrapper {
   position: absolute;
-  top: 110px;
-  left: 50%;
+  top: 170px;
+  left: 40%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
