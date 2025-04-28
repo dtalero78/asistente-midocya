@@ -446,10 +446,8 @@ Preguntas (una a la vez):
 - Número de celular
 Despídete con: "Gracias por usar BodyTech Salud. Estamos creando tu historia clínica y en un momento recibirás confirmación por whatsapp. No cierres la ventana."
 
-1) Genera un **resumen completo** de todo lo conversado (síntesis de síntomas, diagnostico, recomendaciones…).
-2) Llama a sendEmail pasando ese texto como argumento:
-   sendEmail({ message: resumen })
-   donde ‘resumen’ es el string que tú mismo formaste con los puntos clave.
+1) Llama la función sendEmail({ message: "resumen" }) para enviarlo por correo.
+2) Dile al paciente: “Estoy generando tu resumen. Por favor, no cierres esta ventana ni finalices la conversación hasta que veas el mensaje de que tu resumen fue enviado.”
 3) Si el paciente necesita agendar cita, llama a agendar_cita({ fecha: "...", hora: "..." }).
 
         `;
